@@ -1,5 +1,5 @@
 # cxt-template
-自作のChrome拡張機能を作り始める時のベースとなるテンプレートファイルです。
+自作のChrome拡張機能を作り始める時のベースとなるテンプレートファイルです。[Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/)に対応しています。
 
 
 ## Installation
@@ -27,3 +27,17 @@ Chromeを起動して、以下の手順でcxt-templateを拡張機能として�
 | options.css | オプションページのスタイルシートです。 |
 | options.html | Chrome拡張の[オプションページ](https://developer.chrome.com/docs/extensions/mv3/options/)のHTMLファイルです。 |
 | options.js | オプションページのロジックを実装するJavaScriptファイルです。 |
+
+## Permissions
+manifest.jsonで指定しているpermissionは以下の３つです。
+```
+"permissions": [
+  "activeTab", "scripting", "storage"
+],
+```
+
+| permission | 目的
+| --- | --- |
+| [activeTab](https://developer.chrome.com/docs/extensions/mv3/manifest/activeTab/) | ユーザーが拡張を呼び出した時、現在アクティブなタブへのアクセス権を一時的に与えるため。 |
+| scripting | [chrome.scripting]()APIを使用して、ターゲットのWebページのコンテンツにスクリプトやスタイルシートを挿入するため |
+| storage | [chrome.storage](https://developer.chrome.com/docs/extensions/reference/storage/) APIを使用して、optionの設定値を保存・読み込みするため　|
