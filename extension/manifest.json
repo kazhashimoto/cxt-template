@@ -1,0 +1,16 @@
+{
+  "name": "cxt-template",
+  "description": "My Chrome extension template",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+   "default_title": "Click to check characters"
+  },
+  "permissions": [
+    "activeTab", "scripting", "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html"
+}
