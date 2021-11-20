@@ -21,14 +21,19 @@
         options = Object.assign({}, result.options);
         options.preset = false;
       }
-      process(options);
+      start();
     });
   } else {
-    process(options);
+    start();
   }
 
   function init_options() {
     options.preset = true;
+  }
+
+  function start() {
+    document.body.classList.add('_cxt-template', '_cxt-template-done');
+    process(options);
   }
 })(function(options) {
   console.log('### start process ###', options);
