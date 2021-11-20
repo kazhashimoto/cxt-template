@@ -1,4 +1,4 @@
-(function() {
+(function(process) {
   let options = {};
 
   const from_extension = (typeof chrome !== 'undefined' && chrome.extension);
@@ -21,17 +21,15 @@
         options = Object.assign({}, result.options);
         options.preset = false;
       }
-      process();
+      process(options);
     });
   } else {
-    process();
+    process(options);
   }
 
   function init_options() {
     options.preset = true;
   }
-
-  function process() {
-  }
-
-})();
+})(function(options) {
+  console.log('### start process ###', options);
+});
