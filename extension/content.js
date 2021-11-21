@@ -1,5 +1,5 @@
-(function(process) {
-  const CLASSNAME = '_cxt-template'; // [1] <body>に追加するclass名
+(function(classname, init_options, process) {
+  const CLASSNAME = classname;
   let options = {};
 
   const from_extension = (typeof chrome !== 'undefined' && chrome.extension);
@@ -16,7 +16,8 @@
     return;
   }
 
-  init_options();
+  options.preset = true;
+  init_options(options);
   if (from_extension) {
     chrome.storage.sync.get('options', function(result) {
       if ('options' in result) {
@@ -29,19 +30,18 @@
     start();
   }
 
-  function init_options() {
-    // [2] オプションの初期値を設定するコードをここに書く ---
-    options.items = {};
-    options.colors = {};
-    // --- ここまで [2]
-    options.preset = true;
-  }
-
   function start() {
     document.body.classList.add(CLASSNAME, `${CLASSNAME}-active`);
     process(options);
   }
-})(function(options) {
+})('_example',   // [1] <body>に追加するclass名
+function(options) {
+  // [2] オプションの初期値を設定するコードをここに書く ---
+  options.items = {item1: true, item2: true};
+  options.colors = {color1: '#ff0000', color2: '#0000ff'};
+  // --- ここまで [2]
+},
+function(options) {
   // [3] 機能を実装するコードの本体をここに書く ---
   console.log('### start process ###', options);
   // --- ここまで [3]
