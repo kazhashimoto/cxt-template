@@ -4,7 +4,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-   "default_title": "Click to check characters"
+   "default_title": "Click to start script"
   },
   "permissions": [
     "activeTab", "scripting", "storage"
