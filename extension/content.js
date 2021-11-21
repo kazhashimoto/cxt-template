@@ -1,8 +1,9 @@
 (function(process) {
+  const CLASSNAME = '_cxt-template'; // [1] <body>に追加するclass名
   let options = {};
 
   const from_extension = (typeof chrome !== 'undefined' && chrome.extension);
-  if (document.body.classList.contains('_cxt-template')) {
+  if (document.body.classList.contains(CLASSNAME)) {
     if (!from_extension) {
       const script_src = document.currentScript.src;
       const el = document.querySelectorAll(`script[src="${script_src}"]`);
@@ -11,7 +12,7 @@
         last.remove();
       }
     }
-    document.body.classList.toggle('_cxt-template-done');
+    document.body.classList.toggle(`${CLASSNAME}-active`);
     return;
   }
 
@@ -29,13 +30,19 @@
   }
 
   function init_options() {
+    // [2] オプションの初期値を設定するコードをここに書く ---
+    options.items = {};
+    options.colors = {};
+    // --- ここまで [2]
     options.preset = true;
   }
 
   function start() {
-    document.body.classList.add('_cxt-template', '_cxt-template-done');
+    document.body.classList.add(CLASSNAME, `${CLASSNAME}-active`);
     process(options);
   }
 })(function(options) {
+  // [3] 機能を実装するコードの本体をここに書く ---
   console.log('### start process ###', options);
+  // --- ここまで [3]
 });
