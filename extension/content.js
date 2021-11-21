@@ -1,3 +1,10 @@
+/**
+ * ページに挿入されるscript
+ *
+ * @param {Srring} classname  <body>に追加するclass名
+ * @param {function} init_options(options)  オプションの初期値を設定するcallback
+ * @param {funciton} process(options) 機能を実装するコードが実行されるcallback
+ */
 (function(classname, init_options, process) {
   const CLASSNAME = classname;
   let options = {};
