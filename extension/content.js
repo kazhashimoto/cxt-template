@@ -20,7 +20,9 @@
       }
     }
     document.body.classList.toggle(`${CLASSNAME}-active`);
-    return;
+    if (!from_extension) {
+      return;
+    }
   }
 
   options.preset = true;
@@ -38,8 +40,15 @@
   }
 
   function start() {
-    document.body.classList.add(CLASSNAME, `${CLASSNAME}-active`);
-    process(options);
+    let state = true;
+    if (document.body.classList.contains(CLASSNAME)) {
+      if (!document.body.classList.contains(`${CLASSNAME}-active`)) {
+        state = false;
+      }
+    } else {
+      document.body.classList.add(CLASSNAME, `${CLASSNAME}-active`);
+    }
+    process(options, state);
   }
 })('_example',   // [1] <body>に追加するclass名
 function(options) {
@@ -48,8 +57,12 @@ function(options) {
   options.colors = {color1: '#ff0000', color2: '#0000ff'};
   // --- ここまで [2]
 },
-function(options) {
+function(options, state) {
   // [3] 機能を実装するコードの本体をここに書く ---
+  if (!state) { // アイコンの状態がOFFになって呼ばれた時
+    console.log('### action button off ###', options);
+    return;
+  }
   console.log('### start process ###', options);
   // --- ここまで [3]
 });
