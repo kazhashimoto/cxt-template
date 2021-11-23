@@ -3,7 +3,7 @@
 - UI: オプションページ
 - UI: アクションボタンのトグル（ON/OFF表示）
 - オプション項目の設定値の保存と読み込み
-- [ユーザー定義](#User-defined-Script)scriptの実行
+- [ユーザー定義](#user-defined-script)scriptの実行
 - ユーザー定義CSSのコンテンツへの挿入
 
 ## Installation
