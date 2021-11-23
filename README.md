@@ -48,3 +48,15 @@ manifest.jsonで指定しているpermissionは以下の３つです。
 
 ## User-defined Script
 ユーザー定義scriptの組み込み方法です。
+content.jsは以下の構造になっています。
+```
+(function(classname, init_options, process) {
+  // ....
+})('_example',   // [1] <body>に追加するclass名
+function(options) {
+  // [2] オプションの初期値を設定するコードをここに書く
+},
+function(options, active) {
+  // [3] ユーザー定義scriptのコードをここに書く
+});
+```
