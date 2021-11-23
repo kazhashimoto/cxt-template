@@ -48,7 +48,7 @@ manifest.jsonで指定しているpermissionは以下の３つです。
 
 ## User-defined Script
 ユーザー定義scriptの組み込み方法です。
-content.jsは以下の構造になっています。
+content.jsは以下の構造になっています。機能の組み込みにコーディングが必要な箇所は、コメントに示した[1],[2],[3]の部分です。
 ```
 (function(classname, init_options, process) {
   // ....
@@ -57,6 +57,12 @@ function(options) {
   // [2] オプションの初期値を設定するコードをここに書く
 },
 function(options, active) {
-  // [3] ユーザー定義scriptのコードをここに書く
+  // [3] 機能を実装するコードの本体をここに書く
+  if (!active) {
+    // アイコンの状態がOFFになって呼ばれた時
+    // OFFの時の処理をここに書く
+    return;
+  }
+  // 以下、アイコンの状態がONの時のコード
 });
 ```
