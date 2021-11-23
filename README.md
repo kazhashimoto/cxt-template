@@ -76,3 +76,54 @@ class名[1]は次のようにbody要素に設定されます。
 ```
 <body class="_example">
 ```
+
+### Options Page
+options.htmlは、サンプルとして２つのcheckboxと２つのカラーピッカーを含んでいます。
+ユーザーが「保存」ボタンをクリックすると、以下の形式で設定値がChromeのstorageに書き込まれます。
+```
+{
+  items: {item1: boolean, item2: boolean},
+  colors: {color1: #rrggbb, color2: #rrggbb}
+}
+```
+
+拡張アイコンがクリックされると、storageからオプションの設定値が読み込まれ、上記[3]に示したユーザー定義scriptの最初のパラメーターにセットされます。
+```
+function(options, active)
+```
+
+storageに保存されたオプションがない場合、[3]のscriptに渡されるoptionにはプリセット値（上記[2]で初期化した値）が入っています。プリセット値かどうかは、プロパティ```preset```の値(true/false)で確認できます。
+```
+  if (options.preset) { // optionsには初期値が入っている
+    ...
+  } else { // optionsにはstorageから読み込まれた値が入っている
+    ...
+  }
+```
+
+### 実施例
+
+- [img-marker](https://github.com/kazhashimoto/img-marker)
+
+## Appendix
+### Chrome拡張機能を使わずにスクリプトを呼び出す方法
+FirefoxなどChrome以外のブラウザで使用する場合、```./extension/content.js```をブラウザに直接読み込ませることも可能です。これには２つの方法があります。いずれの方法もオプションの設定値は固定です。
+
+#### A. ブラウザの開発者ツールから直接読み込む
+表示中のコンテンツに対して、開発者ツールのコンソールからscriptタグを挿入してcontent.jsをロードする方法です。ただし、Content Security Policyが設定されたページの場合、scriptやstyleの埋め込みがブロックされるため、この方法では動作しません。ローカルのテスト環境でのみ使用してください。
+
+例）
+```
+(function(url) {
+  const s=document.createElement('script');
+  s.src=url;
+  document.body.appendChild(s);
+})("http://localhost/cxt-template/extension/content.js");
+```
+
+#### B. 外部リソースとしてHTMLファイルに記述する
+CSSファイルとjavascriptファイルのパスを指定します。
+```
+<link rel="stylesheet" href="/path/to/extension/content.css">
+<script src="/path/to/extension/content.js"></script>
+```
