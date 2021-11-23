@@ -1,6 +1,10 @@
 # cxt-template
-自作のChrome拡張機能を作り始める時のベースとなるテンプレートファイルです。[Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/)に対応しています。
-
+自作のChrome拡張機能を作り始める時のベースとなるテンプレートファイルです。[Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/)に対応しています。cxt-templateは以下のカストマイズ可能なUIおよび機能を提供します。
+- UI: オプションページ
+- UI: アクションボタンのトグル（ON/OFF表示）
+- オプション項目の設定値の保存と読み込み
+- [ユーザー定義](#User-defined-Script)scriptの実行
+- ユーザー定義CSSのコンテンツへの挿入
 
 ## Installation
 適当なディレクトリにリポジトリをcloneします。もしくはzipファイルをダウンロードして解凍します。
@@ -41,3 +45,6 @@ manifest.jsonで指定しているpermissionは以下の３つです。
 | [activeTab](https://developer.chrome.com/docs/extensions/mv3/manifest/activeTab/) | ユーザーが拡張を呼び出した時、現在アクティブなタブへのアクセス権を一時的に与えるため。 |
 | scripting | [chrome.scripting]()APIを使用して、ターゲットのWebページのコンテンツにスクリプトやスタイルシートを挿入するため |
 | storage | [chrome.storage](https://developer.chrome.com/docs/extensions/reference/storage/) APIを使用して、optionの設定値を保存・読み込みするため　|
+
+## User-defined Script
+ユーザー定義scriptの組み込み方法です。
