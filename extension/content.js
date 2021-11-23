@@ -3,7 +3,11 @@
  *
  * @param {Srring} classname  <body>に追加するclass名
  * @param {function} init_options(options)  オプションの初期値を設定するcallback
- * @param {funciton} process(options) 機能を実装するコードが実行されるcallback
+ * @param {funciton} process(options, active) 機能を実装するコードが実行されるcallback。
+ *    active: actionボタンのclickにより関数が呼ばれた時のボタンの状態
+ *      true -- ボタンがON
+ *      false -- ボタンがOFF
+ *
  */
 (function(classname, init_options, process) {
   const CLASSNAME = classname;
@@ -40,15 +44,15 @@
   }
 
   function start() {
-    let state = true;
+    let active = true;
     if (document.body.classList.contains(CLASSNAME)) {
       if (!document.body.classList.contains(`${CLASSNAME}-active`)) {
-        state = false;
+        active = false;
       }
     } else {
       document.body.classList.add(CLASSNAME, `${CLASSNAME}-active`);
     }
-    process(options, state);
+    process(options, active);
   }
 })('_example',   // [1] <body>に追加するclass名
 function(options) {
@@ -57,9 +61,9 @@ function(options) {
   options.colors = {color1: '#ff0000', color2: '#0000ff'};
   // --- ここまで [2]
 },
-function(options, state) {
+function(options, active) {
   // [3] 機能を実装するコードの本体をここに書く ---
-  if (!state) { // アイコンの状態がOFFになって呼ばれた時
+  if (!active) { // アイコンの状態がOFFになって呼ばれた時
     console.log('### action button off ###', options);
     return;
   }
