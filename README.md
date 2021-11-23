@@ -1,7 +1,7 @@
 # cxt-template
 自作のChrome拡張機能を作り始める時のベースとなるテンプレートファイルです。[Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/)に対応しています。cxt-templateは以下のカストマイズ可能なUIおよび機能を提供します。
 - UI: オプションページ
-- UI: アクションボタンのトグル（ON/OFF表示）
+- UI: Chromeツールバーに表示される拡張アイコンのトグル（ON/OFF表示）
 - オプション項目の設定値の保存と読み込み
 - [ユーザー定義](#user-defined-script)scriptの実行
 - ユーザー定義CSSのコンテンツへの挿入
@@ -42,7 +42,7 @@ manifest.jsonで指定しているpermissionは以下の３つです。
 
 | permission | 目的
 | --- | --- |
-| [activeTab](https://developer.chrome.com/docs/extensions/mv3/manifest/activeTab/) | ユーザーが拡張を呼び出した時、現在アクティブなタブへのアクセス権を一時的に与えるため。 |
+| [activeTab](https://developer.chrome.com/docs/extensions/mv3/manifest/activeTab/) | ユーザーが拡張アイコンをクリックして呼び出した時、現在アクティブなタブへのアクセス権を一時的に与えるため。 |
 | scripting | [chrome.scripting]()APIを使用して、ターゲットのWebページのコンテンツにスクリプトやスタイルシートを挿入するため |
 | storage | [chrome.storage](https://developer.chrome.com/docs/extensions/reference/storage/) APIを使用して、optionの設定値を保存・読み込みするため　|
 
@@ -65,4 +65,14 @@ function(options, active) {
   }
   // 以下、アイコンの状態がONの時のコード
 });
+```
+
+class名[1]は次のようにbody要素に設定されます。
+表示中のタブについて、ユーザーが拡張アイコンを最初にクリックした時、もしくは状態がOFF表示のアイコンをクリックした時：
+```
+<body class="_example _example-active">
+```
+状態がON表示のアイコンをクリックした時：
+```
+<body class="_example">
 ```
